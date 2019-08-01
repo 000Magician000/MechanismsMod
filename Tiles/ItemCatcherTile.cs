@@ -61,15 +61,19 @@ namespace MechanismsMod.Tiles {
         public override void HitWire(int i, int j)
         {
             Main.tile[i, j].inActive(!Main.tile[i, j].inActive());
+            if (Main.tile[i,j].inActive())
+            {
+                foreach (Item item in items)
+                {
+                    Item.NewItem(new Vector2(i, j) * 16 + center, item.type, item.stack, prefixGiven: item.prefix);
+                }
+                items.Clear();
+            }
         }
 
         public override void RightClick(int i, int j)
         {
-            foreach(Item item in items)
-            {
-                Item.NewItem(new Vector2(i, j) * 16 + center, item.type, item.stack, prefixGiven: item.prefix);
-            }
-            items.Clear();
+            
         }
 
         List<Item> items = new List<Item>();

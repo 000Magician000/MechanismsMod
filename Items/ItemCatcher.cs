@@ -16,6 +16,7 @@ namespace MechanismsMod.Items {
             item.useStyle = 1;
             item.consumable = true;
             item.createTile = mod.TileType("ItemCatcherTile");
+            item.mech = true;
         }
     }
 }
