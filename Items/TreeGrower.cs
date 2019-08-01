@@ -15,7 +15,7 @@ namespace MechanismsMod.Items {
             item.useTime = 10;
             item.useStyle = 1;
             item.consumable = true;
-            item.createTile = mod.TileType("TreeGrowerTile");
+            item.createTile = mod.TileType("TreeGrower");
             item.mech = true;
         }
     }
