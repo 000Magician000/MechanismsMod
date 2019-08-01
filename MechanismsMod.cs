@@ -4,8 +4,12 @@ namespace MechanismsMod
 {
 	public class MechanismsMod : Mod
 	{
-		public MechanismsMod()
-		{
+        public static MechanismsMod Instance;
+        public MechanismsMod() {
+            Instance = this;
+            Properties = new ModProperties {
+                Autoload = true
+            };
 		}
 	}
 }
