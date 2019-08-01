@@ -27,6 +27,7 @@ namespace MechanismsMod.Items.Tools {
                 out var tileEntity) && tileEntity is IWrenchConfigurable mechanic) {
 
                 mechanic.Configure(player);
+                Main.PlaySound(0, player.Center, 0);
             }
 
             return true;
