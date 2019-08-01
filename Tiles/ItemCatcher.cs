@@ -7,7 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MechanismsMod.Tiles {
-    public class ItemCatcherTile : ModTile
+    public class ItemCatcher : ModTile
     {
         public override void SetDefaults()
         {

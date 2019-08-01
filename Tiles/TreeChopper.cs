@@ -6,7 +6,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MechanismsMod.Tiles {
-    public class TreeChopperTile : ModTile
+    public class TreeChopper : ModTile
     {
         public override void SetDefaults()
         {

@@ -5,7 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MechanismsMod.Tiles {
-    public class TreeGrowerTile : ModTile
+    public class TreeGrower : ModTile
     {
         public override void SetDefaults()
         {
