@@ -11,27 +11,35 @@ using Terraria.ObjectData;
 
 namespace MechanismsMod.Tiles
 {
-    public class TreeChopper : ModTile
+    public class ObsidianGenerator : ModTile
     {
         public override void SetDefaults()
         {
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.HookPostPlaceMyPlayer =
-                new Terraria.DataStructures.PlacementHook(mod.GetTileEntity<TETreeChopper>().Hook_AfterPlacement, -1, 0, true);
+                new Terraria.DataStructures.PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
             TileObjectData.addTile(Type);
 
             Main.tileSolid[Type] = true;
             Main.tileBlockLight[Type] = true;
             Main.tileLighted[Type] = true;
             dustType = -1;
-            drop = mod.ItemType("TreeChopper");
+            drop = mod.ItemType("ObsidianGenerator");
 
             AddMapEntry(Color.Gray);
         }
 
+        public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
+        {
+            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TEObsidianGenerator te)
+            {
+                te.Draw(spriteBatch);
+            }
+        }
+
         public override void HitWire(int i, int j)
         {
-            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TETreeChopper te)
+            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TEObsidianGenerator te)
             {
                 te.WireHit();
             }
@@ -40,7 +48,7 @@ namespace MechanismsMod.Tiles
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
         {
             if (!fail)
-            mod.GetTileEntity("TETreeChopper").Kill(i, j);
+            mod.GetTileEntity("TEObsidianGenerator").Kill(i, j);
         }
         //    public override void SetDefaults()
         //    {

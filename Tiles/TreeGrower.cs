@@ -29,9 +29,9 @@ namespace MechanismsMod.Tiles {
 
         public override void HitWire(int i, int j)
         {
-            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TETreeGrower grower)
+            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TETreeGrower te)
             {
-                grower.WireHit();
+                te.WireHit();
             }
         }
 
