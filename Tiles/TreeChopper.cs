@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MechanismsMod.Tiles.TEMech;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.IO;
 using System.Linq;
@@ -26,6 +27,20 @@ namespace MechanismsMod.Tiles
             drop = mod.ItemType("TreeChopper");
 
             AddMapEntry(Color.Gray);
+        }
+
+        public override void HitWire(int i, int j)
+        {
+            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TETreeChopper chopper)
+            {
+                chopper.WireHit();
+            }
+        }
+
+        public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem)
+        {
+            if (!fail)
+            mod.GetTileEntity("TETreeChopper").Kill(i, j);
         }
         //    public override void SetDefaults()
         //    {

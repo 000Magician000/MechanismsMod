@@ -6,7 +6,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
-namespace MechanismsMod.Tiles {
+namespace MechanismsMod.Tiles.TEMech {
     public class TEItemCatcher : ModTileEntity, IWrenchConfigurable {
         public void Configure(Player player) {
             if (storedItem != null) {

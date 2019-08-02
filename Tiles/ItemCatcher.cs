@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using MechanismsMod.Tiles.TEMech;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,10 @@ namespace MechanismsMod.Tiles {
         }
 
         public override void KillTile(int i, int j, ref bool fail, ref bool effectOnly, ref bool noItem) {
-            mod.GetTileEntity("TEItemCatcher").Kill(i, j);
+            if (!fail)
+            {
+                mod.GetTileEntity("TEItemCatcher").Kill(i, j);
+            }
         }
 
         public override void HitWire(int i, int j) {
