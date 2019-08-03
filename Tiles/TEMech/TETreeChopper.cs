@@ -9,6 +9,7 @@ using Terraria.ModLoader.IO;
 
 namespace MechanismsMod.Tiles.TEMech {
     public class TETreeChopper : API.TileEntities.MechanicalTE, API.IWrenchConfigurable {
+        public void AltConfigure(Player player) => Configure(player);
         public void Configure(Player player) {
             forced = !forced;
             distance = forced ? dist1 : dist2;

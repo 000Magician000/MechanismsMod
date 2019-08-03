@@ -8,6 +8,7 @@ using Terraria.ID;
 
 namespace MechanismsMod.Tiles.TEMech {
     public class TETreeGrower : API.TileEntities.MechanicalTE, API.IWrenchConfigurable {
+        public void AltConfigure(Player player) => Configure(player);
         public void Configure(Player player) {
             Main.NewText("I'm here!");
         }

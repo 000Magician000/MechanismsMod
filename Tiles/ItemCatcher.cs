@@ -34,12 +34,6 @@ namespace MechanismsMod.Tiles {
             }
         }
 
-        public override void HitWire(int i, int j) {
-            if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TEItemCatcher te) {
-                te.WireHit();
-            }
-        }
-
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch) {
             if (TileEntity.ByPosition.TryGetValue(new Point16(i, j), out var tileEntity) && tileEntity is TEItemCatcher te) {
                 te.Draw(spriteBatch);

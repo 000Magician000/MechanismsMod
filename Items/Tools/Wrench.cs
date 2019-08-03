@@ -22,6 +22,21 @@ namespace MechanismsMod.Items.Tools {
             item.autoReuse = true;
         }
 
+        public override bool CanRightClick() => true;
+
+        public override bool AltFunctionUse(Player player) {
+            if (player.altFunctionUse == 2) {
+                if (TileEntity.ByPosition.TryGetValue(new Point16((int)Main.MouseWorld.X / 16, (int)Main.MouseWorld.Y / 16),
+                out var tileEntity) && tileEntity is IWrenchConfigurable mechanic) {
+
+                    mechanic.AltConfigure(player);
+                    Main.PlaySound(0, player.Center, 0);
+                }
+            }
+
+            return true;
+        }
+
         public override bool UseItem(Player player) {
             if (TileEntity.ByPosition.TryGetValue(new Point16((int)Main.MouseWorld.X / 16, (int)Main.MouseWorld.Y / 16),
                 out var tileEntity) && tileEntity is IWrenchConfigurable mechanic) {

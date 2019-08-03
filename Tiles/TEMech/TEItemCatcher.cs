@@ -8,6 +8,10 @@ using Terraria.ModLoader.IO;
 
 namespace MechanismsMod.Tiles.TEMech {
     public class TEItemCatcher : ModTileEntity, IWrenchConfigurable {
+        public void AltConfigure(Player player) {
+            Main.tile[Position.X, Position.Y].active(!Main.tile[Position.X, Position.Y].active());
+        }
+
         public void Configure(Player player) {
             if (storedItem != null) {
                 player.QuickSpawnItem(storedItem.type, storedItem.stack);
@@ -23,10 +27,6 @@ namespace MechanismsMod.Tiles.TEMech {
             var position = (new Vector2(Position.X, Position.Y) * 16 - Main.screenPosition) + new Vector2(180f, 158f + (10f * Main.essScale));
             spriteBatch.Draw(Main.itemTexture[storedItem.type], position, Color.White);
             Utils.DrawBorderString(spriteBatch, $"x{storedItem.stack}", position + new Vector2(25f, 0f), Color.White);
-        }
-
-        public void WireHit() {
-            
         }
 
         public ItemContainer storedItem;
@@ -76,5 +76,6 @@ namespace MechanismsMod.Tiles.TEMech {
         public override bool ValidTile(int i, int j) {
             return Main.tile[i, j].type == mod.TileType("ItemCatcher");
         }
+
     }
 }

@@ -12,6 +12,7 @@ namespace MechanismsMod.Tiles.TEMech
 {
     public class TEObsidianGenerator : API.TileEntities.MechanicalTE, API.IWrenchConfigurable
     {
+        public void AltConfigure(Player player) => Configure(player);
         public void Configure(Player player)
         {
             //side *= -1;
