@@ -9,6 +9,7 @@ namespace MechanismsMod.Items.Tools {
     public class Wrench : ModItem {
         public override void SetStaticDefaults() {
             Tooltip.SetDefault("Hit machine to configure/scan");
+            Tooltip.SetDefault("Right click machine for alternate configuration");
         }
 
         public override void SetDefaults() {
@@ -21,8 +22,6 @@ namespace MechanismsMod.Items.Tools {
             item.rare = ItemRarityID.Green;
             item.autoReuse = true;
         }
-
-        public override bool CanRightClick() => true;
 
         public override bool AltFunctionUse(Player player) {
             if (player.altFunctionUse == 2) {
