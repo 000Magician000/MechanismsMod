@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Enums;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -16,8 +17,37 @@ namespace MechanismsMod.Tiles
         public override void SetDefaults()
         {
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
+
+            TileObjectData.newTile.StyleMultiplier = 5;
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
             TileObjectData.newTile.HookPostPlaceMyPlayer =
-                new Terraria.DataStructures.PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
+                new PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
+            TileObjectData.addAlternate(0);
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+            TileObjectData.newAlternate.AnchorTop = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide, 1, 0);
+            TileObjectData.newAlternate.AnchorBottom = AnchorData.Empty;
+            TileObjectData.newTile.HookPostPlaceMyPlayer =
+                new PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
+            TileObjectData.addAlternate(1);
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+            TileObjectData.newAlternate.AnchorLeft = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide, 1, 0);
+            TileObjectData.newAlternate.AnchorBottom = AnchorData.Empty;
+            TileObjectData.newTile.HookPostPlaceMyPlayer =
+                new PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
+            TileObjectData.addAlternate(2);
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+            TileObjectData.newAlternate.AnchorRight = new AnchorData(AnchorType.SolidTile | AnchorType.SolidSide, 1, 0);
+            TileObjectData.newAlternate.AnchorBottom = AnchorData.Empty;
+            TileObjectData.newTile.HookPostPlaceMyPlayer =
+                new PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
+            TileObjectData.addAlternate(3);
+            TileObjectData.newAlternate.CopyFrom(TileObjectData.newTile);
+            TileObjectData.newAlternate.AnchorWall = true;
+            TileObjectData.newAlternate.AnchorBottom = AnchorData.Empty;
+            TileObjectData.newTile.HookPostPlaceMyPlayer =
+                new PlacementHook(mod.GetTileEntity<TEObsidianGenerator>().Hook_AfterPlacement, -1, 0, true);
+            TileObjectData.addAlternate(4);
+
             TileObjectData.addTile(Type);
 
             Main.tileSolid[Type] = true;
