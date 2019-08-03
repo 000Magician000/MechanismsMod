@@ -43,25 +43,28 @@ namespace MechanismsMod.Tiles.TEMech
         int obsidian = 0;
 
         int time = 0;
-        int maxtime = 60;
+        int maxtime = 30;
 
         public override void Update()
         {
-            for (var i = 0; i < Main.item.Length; i++)
+            if (WorldGen.InWorld(Position.X,Position.Y-1))
             {
-                var item = Main.item[i];
-                if (!item.IsAir && Vector2.Distance(item.Center, Position.ToWorldCoordinates()) < 30)
+                Tile t = Main.tile[Position.X, Position.Y - 1];
+                if (t.liquid>0)
                 {
-                    if (item.type == ItemID.WaterBucket)
+                    
+                    if (t.liquidType() == 0)
                     {
-                        water += item.stack;
-                        Set(item);
+                        water += t.liquid/255;
+                        t.liquid = 0;
                     }
-                    else if (item.type == ItemID.LavaBucket)
+                    else if (t.liquidType() == 1)
                     {
-                        lava += item.stack;
-                        Set(item);
+                        lava += t.liquid/255;
+                        t.liquid = 0;
                     }
+                    
+                    Set();
                 }
             }
 
@@ -76,13 +79,8 @@ namespace MechanismsMod.Tiles.TEMech
             }
         }
 
-        public void Set(Item item)
+        public void Set()
         {
-            var it = Item.NewItem(item.Center, ItemID.EmptyBucket, item.stack);
-            Main.item[it].velocity = -item.velocity;
-            item.TurnToAir();
-            item.active = false;
-
             int lower = Math.Min(water, lava);
             water -= lower;
             lava -= lower;
@@ -107,6 +105,24 @@ namespace MechanismsMod.Tiles.TEMech
                 Main.item[i].velocity = Vector2.Zero;
                 obsidian = 0;
             }
+        }
+
+        public override void Load(TagCompound tag)
+        {
+            queue = tag.GetInt("queue");
+            obsidian = tag.GetInt("obsidian");
+            water = tag.GetInt("water");
+            lava = tag.GetInt("lava");
+        }
+
+        public override TagCompound Save()
+        {
+            var tag = new TagCompound();
+            tag.Add("queue", queue);
+            tag.Add("obsidian", obsidian);
+            tag.Add("water", water);
+            tag.Add("lava", lava);
+            return tag;
         }
     }
 }
