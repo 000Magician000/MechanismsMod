@@ -15,8 +15,6 @@ namespace MechanismsMod.Tiles.TEMech
         public void AltConfigure(Player player) => Configure(player);
         public void Configure(Player player)
         {
-            //side *= -1;
-            //Main.NewText("Side changed to " + (side == 1 ? "down" : "up"));
         }
 
         public override int Hook_AfterPlacement(int i, int j, int type, int style, int direction)
@@ -39,10 +37,13 @@ namespace MechanismsMod.Tiles.TEMech
         int side = 1;
 
         int water = 0;
-
         int lava = 0;
 
+        int queue = 0;
         int obsidian = 0;
+
+        int time = 0;
+        int maxtime = 60;
 
         public override void Update()
         {
@@ -61,8 +62,16 @@ namespace MechanismsMod.Tiles.TEMech
                         lava += item.stack;
                         Set(item);
                     }
+                }
+            }
 
-                    
+            if (queue>0)
+            {
+                if (++time>=maxtime)
+                {
+                    queue--;
+                    obsidian++;
+                    time = 0;
                 }
             }
         }
@@ -77,7 +86,7 @@ namespace MechanismsMod.Tiles.TEMech
             int lower = Math.Min(water, lava);
             water -= lower;
             lava -= lower;
-            obsidian += lower;
+            queue += lower;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -94,23 +103,10 @@ namespace MechanismsMod.Tiles.TEMech
         {
             if (obsidian > 0)
             {
-                Item.NewItem(Position.ToWorldCoordinates() - new Vector2(0, 16), ItemID.Obsidian, obsidian);
+                var i = Item.NewItem(Position.ToWorldCoordinates() - new Vector2(0, 16), ItemID.Obsidian, obsidian);
+                Main.item[i].velocity = Vector2.Zero;
                 obsidian = 0;
             }
-            /*
-            if (water>0)
-            {
-                if (WorldGen.InWorld(Position.X,Position.Y+side))
-                {
-                    var tile = Main.tile[Position.X, Position.Y + side];
-                    if (tile.liquid==0)
-                    {
-                        tile.liquid = 255;
-                        WorldGen.WaterCheck();
-                        water--;
-                    }
-                }
-            }*/
         }
     }
 }
